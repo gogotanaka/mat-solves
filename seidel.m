@@ -8,13 +8,16 @@ Augm=[A b]
 Y=zeros(n,1);
 Y=x0;
 for k=1:itmax+1
-    for i=1:n
-        S=A(i,1:i-1)*x(1:i-1) + A(i,i+1:n)*x0(i+1:n);
-        if(A(i,i)==0)
-            break
-        end
-        x(i)=(-S+b(i))/A(i,i);
+    U = triu(A,1);
+    D = diag(diag(A));
+    L = tril(A,-1);
+
+    if ismember(0,diag(D))
+        break
     end
+
+    x = (L + D) ^(-1) * (b - U * x0);
+
     err=abs(norm(x-x0));
     rerr=err/(norm(x)+eps);
     x0=x;
@@ -24,7 +27,7 @@ for k=1:itmax+1
     end
 end
 % Print the results
-if(A(i,i)==0)
+if ismember(0,diag(D))
     disp('        division by zero')
 elseif (k==itmax+1)
     disp('        No convergence')
