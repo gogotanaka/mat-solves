@@ -9,13 +9,7 @@ Y=zeros(n,1);
 Y=x0;
 for k=1:itmax+1
     for i=1:n
-        S=0;
-        for j=1:i-1
-            S=S+A(i,j)*x(j);
-        end
-        for j=i+1:n
-            S=S+A(i,j)*x0(j);
-        end
+        S=A(i,1:i-1)*x(1:i-1) + A(i,i+1:n)*x0(i+1:n);
         if(A(i,i)==0)
             break
         end
@@ -42,7 +36,7 @@ else
     fprintf('\n');
     for i=1:n
         fprintf('x%1.0f =    ',i)
-        fprintf('%10.6f ',(i,[1:k+1]))
+        fprintf('%10.6f ',Y(i,[1:k+1]))
         fprintf('\n');
     end
     fprintf('\n');
