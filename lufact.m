@@ -5,12 +5,9 @@ y=zeros(n,1);
 x=zeros(n,1);
 fprintf('\n');
 
-for i=1:n
-    U(i,i)=1;
-end
+U=eye(n);
 
-L(1,1)=A(1,1)/U(1,1);
-for j=2:n
+for j=1:n
     L(j,1)=A(j,1)/U(1,1);
     U(1,j)=A(1,j)/L(1,1);
 end

@@ -11,11 +11,11 @@ for k=1:itmax+1
     for i=1:n
         S=0;
         for j=1:n
-            if (j~=i)   
+            if (j~=i)
               S=S+A(i,j)*x0(j);
             end
         end
-        if(A(i,i)==0)
+        if (A(i,i)==0)
             break
         end
         x(i)=(-S+b(i))/A(i,i);
@@ -30,23 +30,21 @@ for k=1:itmax+1
 end
 % Print the results
 if(A(i,i)==0)
- disp('        division by zero')
+    disp('        division by zero')
 elseif (k==itmax+1)
- disp('        No convergence')
+    disp('        No convergence')
 else
- fprintf('\n');
- disp(' The solution vectors are:')
- fprintf('\n');
- disp('iter #       0         1         2         3        4        ...')
- fprintf('\n'); 
- for i=1:n
-    fprintf('x%1.0f =    ',i)
-    fprintf('%10.6f',Y(i,[1:k+1]))
     fprintf('\n');
- end
- fprintf('\n');
- disp(['The method converges after ',num2str(k),' iterations to']);
- x
+    disp(' The solution vectors are:')
+    fprintf('\n');
+    disp('iter #       0         1         2         3        4        ...')
+    fprintf('\n');
+    for i=1:n
+        fprintf('x%1.0f =    ',i)
+        fprintf('%10.6f ',Y(i,[1:k+1]))
+        fprintf('\n');
+    end
+    fprintf('\n');
+    disp(['The method converges after ',num2str(k),' iterations to']);
+    x
 end
-
-
